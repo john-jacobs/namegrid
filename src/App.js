@@ -121,7 +121,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Wordle for Babies</h1>
+      <h1>NameGrid</h1>
 
       {solution ? (
         <>
