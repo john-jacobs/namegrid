@@ -1,0 +1,153 @@
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #f9f9f9;
+    color: #222;
+  }
+  
+  .app {
+    padding: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* Board */
+  .board {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .guess-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+  
+  .tile {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid #999;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ccc;
+    color: #222;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  /* Flip animation */
+  .tile.flip {
+    animation: flip 0.4s ease forwards;
+    transform-style: preserve-3d;
+  }
+  
+  @keyframes flip {
+    0% {
+      transform: rotateX(0);
+      background-color: #ccc;
+      color: #222;
+    }
+    49% {
+      transform: rotateX(90deg);
+      background-color: #ccc;
+      color: transparent;
+    }
+    50% {
+      transform: rotateX(90deg);
+    }
+    51% {
+      color: white;
+    }
+    100% {
+      transform: rotateX(0deg);
+    }
+  }
+  
+  /* Final colors revealed only with .revealed + data-status */
+  .tile.revealed[data-status="correct"] {
+    background-color: green;
+    border-color: green;
+    color: white;
+  }
+  
+  .tile.revealed[data-status="present"] {
+    background-color: goldenrod;
+    border-color: goldenrod;
+    color: white;
+  }
+  
+  .tile.revealed[data-status="absent"] {
+    background-color: #777;
+    border-color: #777;
+    color: white;
+  }
+  
+  /* Status Message */
+  .status-message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #333;
+  }
+  
+  /* Keyboard */
+  .keyboard {
+    margin-top: 1.5rem;
+  }
+  
+  .keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .key {
+    font-size: 1rem;
+    padding: 0.75rem 0.6rem;
+    border: none;
+    background: #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 2.2rem;
+    text-transform: uppercase;
+  }
+  
+  .key:active {
+    background: #bbb;
+  }
+  
+  /* Link Builder styles */
+  .result {
+    margin-top: 1.5rem;
+  }
+  
+  .result input[type="text"] {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  /* Responsive Tweaks */
+  @media (max-width: 500px) {
+    .tile {
+      width: 2rem;
+      height: 2rem;
+      font-size: 1.2rem;
+    }
+  
+    .key {
+      font-size: 0.9rem;
+      padding: 0.6rem 0.5rem;
+      min-width: 1.8rem;
+    }
+  }
+  
