@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Keyboard from './components/Keyboard';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
 const NUM_GUESSES = 6;
@@ -12,6 +13,7 @@ function App() {
   const [gameOver, setGameOver] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [flippedRowIndex, setFlippedRowIndex] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -144,6 +146,13 @@ function App() {
           </div>
 
           {statusMessage && <div className="status-message">{statusMessage}</div>}
+
+          {gameOver && (
+            <div className="end-options">
+              <button onClick={() => window.location.reload()}>Play Again</button>
+              <button onClick={() => navigate('/builder')}>Create Your Own NameGrid</button>
+            </div>
+          )}
 
           {!gameOver && <Keyboard onKey={handleKeyboardInput} />}
         </>

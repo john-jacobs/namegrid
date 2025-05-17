@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
+import { useNavigate } from 'react-router-dom';
 
 function LinkBuilder() {
   const [name, setName] = useState('');
   const [generatedUrl, setGeneratedUrl] = useState('');
+  const navigate = useNavigate();
 
   const handleGenerate = (e) => {
     e.preventDefault();
@@ -17,6 +19,12 @@ function LinkBuilder() {
     if (generatedUrl) {
       navigator.clipboard.writeText(generatedUrl);
       alert('Link copied to clipboard!');
+    }
+  };
+
+  const handlePlay = () => {
+    if (generatedUrl) {
+      window.location.href = generatedUrl;
     }
   };
 
@@ -42,9 +50,10 @@ function LinkBuilder() {
             value={generatedUrl}
             onClick={(e) => e.target.select()}
           />
-          <button onClick={handleCopy} style={{ marginTop: '0.5rem' }}>
-            Copy Link
-          </button>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+            <button onClick={handleCopy}>Copy Link</button>
+            <button onClick={handlePlay}>Play</button>
+          </div>
 
           <div style={{ marginTop: '1rem' }}>
             <QRCodeSVG value={generatedUrl} size={150} />
