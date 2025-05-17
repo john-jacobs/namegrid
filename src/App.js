@@ -123,7 +123,11 @@ function App() {
 
   return (
     <div className="app">
-      <h1>NameGrid</h1>
+      <div className="logo-title">
+          <img src="/namegrid-logo.png" alt="NameGrid logo" className="logo-image" />
+          <h1>NameGrid</h1>
+      </div>
+
 
       {solution ? (
         <>
