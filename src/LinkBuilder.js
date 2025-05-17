@@ -13,6 +13,13 @@ function LinkBuilder() {
     setGeneratedUrl(url);
   };
 
+  const handleCopy = () => {
+    if (generatedUrl) {
+      navigator.clipboard.writeText(generatedUrl);
+      alert('Link copied to clipboard!');
+    }
+  };
+
   return (
     <div className="app">
       <h1>Build a NameGrid Link</h1>
@@ -35,6 +42,9 @@ function LinkBuilder() {
             value={generatedUrl}
             onClick={(e) => e.target.select()}
           />
+          <button onClick={handleCopy} style={{ marginTop: '0.5rem' }}>
+            Copy Link
+          </button>
 
           <div style={{ marginTop: '1rem' }}>
             <QRCodeSVG value={generatedUrl} size={150} />
