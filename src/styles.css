@@ -125,6 +125,16 @@ body {
   .key:active {
     background: #bbb;
   }
+  .enter-key {
+    background-color: #4caf50; /* green */
+    color: white;
+    font-weight: bold;
+  }
+  
+  .enter-key:hover {
+    background-color: #43a047;
+  }
+  
   
   /* Link Builder styles */
   .result {

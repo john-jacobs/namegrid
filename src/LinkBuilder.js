@@ -15,7 +15,7 @@ function LinkBuilder() {
 
   return (
     <div className="app">
-      <h1>Build a Wordle for Babies Link</h1>
+      <h1>Build a NameGrid Link</h1>
       <form onSubmit={handleGenerate}>
         <input
           type="text"

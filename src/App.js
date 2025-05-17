@@ -8,6 +8,7 @@ function App() {
   const [solution, setSolution] = useState('');
   const [currentGuess, setCurrentGuess] = useState('');
   const [guesses, setGuesses] = useState([]);
+  const [statusesList, setStatusesList] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [flippedRowIndex, setFlippedRowIndex] = useState(null);
@@ -22,10 +23,10 @@ function App() {
         setSolution(decoded);
       } catch (e) {
         console.error('Invalid base64 in URL:', e);
-        setSolution('juniper');
+        setSolution('chuck');
       }
     } else {
-      setSolution('juniper');
+      setSolution('chuck');
     }
   }, []);
 
@@ -57,7 +58,10 @@ function App() {
     const guess = currentGuess.toLowerCase();
     if (gameOver || guess.length !== solution.length) return;
 
+    const newStatuses = getTileStatuses(guess, solution);
+
     setGuesses([...guesses, guess]);
+    setStatusesList([...statusesList, newStatuses]);
     setCurrentGuess('');
     setStatusMessage('');
     setFlippedRowIndex(guesses.length);
@@ -107,7 +111,7 @@ function App() {
       <div
         key={idx}
         className={className}
-        data-status={rowIdx === flippedRowIndex ? status : ''}
+        data-status={status}
         style={{ animationDelay: delay }}
       >
         {char}
@@ -117,7 +121,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>NameGrid</h1>
+      <h1>Wordle for Babies</h1>
 
       {solution ? (
         <>
@@ -125,7 +129,7 @@ function App() {
             {[...Array(NUM_GUESSES)].map((_, rowIdx) => {
               const isCurrent = rowIdx === guesses.length;
               const guess = guesses[rowIdx] || (isCurrent ? currentGuess : '');
-              const statuses = guess && !isCurrent ? getTileStatuses(guess, solution) : [];
+              const statuses = statusesList[rowIdx] || [];
 
               return (
                 <div key={rowIdx} className="guess-row">

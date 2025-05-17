@@ -1,20 +1,21 @@
 import React from 'react';
+import '../styles.css';
 
-const KEY_ROWS = [
-  ['Q','W','E','R','T','Y','U','I','O','P'],
-  ['A','S','D','F','G','H','J','K','L'],
-  ['Enter','Z','X','C','V','B','N','M','Backspace']
+const rows = [
+  ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+  ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+  ['Enter', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Backspace']
 ];
 
 function Keyboard({ onKey }) {
   return (
     <div className="keyboard">
-      {KEY_ROWS.map((row, i) => (
-        <div className="keyboard-row" key={i}>
+      {rows.map((row, rowIndex) => (
+        <div key={rowIndex} className="keyboard-row">
           {row.map((key) => (
             <button
               key={key}
-              className="key"
+              className={`key ${key === 'Enter' ? 'enter-key' : ''} ${key === 'Backspace' ? 'backspace-key' : ''}`}
               onClick={() => onKey(key)}
             >
               {key === 'Backspace' ? '⌫' : key}
